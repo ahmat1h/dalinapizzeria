@@ -1,0 +1,2369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+  <title>Dalina Pizzeria</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    /* Header layout 
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+      padding: 1rem 2rem;
+      flex-wrap: wrap;
+    }
+
+    header .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #000000;
+      text-decoration: none;
+      font-family: Montserrat;
+    }
+
+    header nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    header nav a {
+      text-decoration: none;
+      color: #000000;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: Montserrat;
+    }
+
+    header nav a.active {
+      border-bottom: 3px solid #005a8c;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      header nav {
+        margin-top: 0.5rem;
+      }
+    }
+    */
+
+    /* === NAVBAR BASE === */
+    .navbar {
+      background-color: #fff;
+      /* deep black background */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    /* === LOGO === */
+    .logo {
+      color: #111;
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: 1px;
+    }
+
+    /* === NAV LINKS === */
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      color: #111;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    /* === HOVER EFFECT === */
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 2px;
+      background-color: #111;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: #111;
+    }
+
+    /* === ACTIVE LINK === */
+    .nav-links a.active {
+      color: #111;
+      font-weight: 700;
+    }
+
+    .nav-links a.active::after {
+      width: 100%;
+      background-color: #111;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        padding: 15px 30px;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+    }
+
+
+    /* Sections */
+    section {
+      display: none;
+      padding: 2rem;
+    }
+
+
+    section.active {
+      display: block;
+    }
+
+    section h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    /* Cards grid for Menu */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      justify-items: center;
+    }
+
+    /* Force exactly 2 per row on phones */
+    @media (max-width: 768px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      width: 260px;
+      height: 380px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      max-height: 250px;
+      object-fit: contain;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.85rem;
+      margin: 0.5rem;
+      color: #555;
+      flex: 1;
+    }
+
+    .card .price {
+      font-weight: bold;
+      display: block;
+      margin: 0.5rem;
+      color: #333;
+    }
+
+
+
+
+    .intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      /* 50% + 50% */
+      align-items: stretch;
+      /* stretch both to equal height */
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    /* Make the text & image fill their cell fully */
+
+
+
+    .menu-title {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #333;
+      margin-bottom: 1.5rem;
+    }
+
+    .menu-category {
+      margin-bottom: 3rem;
+    }
+
+
+
+    .menu-category h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      color: #0a1b55;
+      margin-bottom: 0.5rem;
+    }
+
+    .menu-category .cards {
+      display: flex;
+      /* use flex just for these sections */
+      flex-wrap: wrap;
+      /* wrap rows */
+      justify-content: center;
+      /* centre cards horizontally */
+      gap: 1rem;
+      /* same gap everywhere */
+    }
+
+    /* Flex-centering for non-pizza menu categories (Starters, Desserts, Drinks) */
+    .menu-category:not(:first-of-type) .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    /* Force all cards to 2 per row on phones */
+    @media (max-width: 768px) {
+      .cards {
+        display: grid !important;
+        /* ensure grid layout */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        justify-items: center;
+      }
+    }
+
+
+    .menu-description {
+      text-align: center;
+      font-size: 1rem;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .cards.pizzas {
+      display: grid;
+      /* keep your original grid for pizzas */
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      justify-items: center;
+    }
+
+
+
+    @media (max-width: 768px) {
+      .intro {
+        grid-template-columns: 1fr;
+        text-align: center;
+        max-height: none;
+        margin-bottom: 7rem;
+        /* increase gap below intro */
+      }
+
+      .intro-image {
+        margin-top: 1.5rem;
+      }
+    }
+
+    /* Outer Card / Box */
+    .about-us-card {
+      display: flex;
+      justify-content: center;
+      padding: 3rem;
+      background-color: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: none;
+      margin-top: 8rem;
+      /* more space above */
+      margin-bottom: 8rem;
+      /* more space below */
+      padding-top: 4rem;
+      /* optional internal spacing */
+      padding-bottom: 4rem;
+    }
+
+    /* Inner Card */
+    .inner-card {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      /* image + text */
+      width: 750px;
+      height: 350px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Image inside Inner Card */
+    .inner-image img {
+      width: 380px;
+      height: 350px;
+      object-fit: cover;
+    }
+
+    /* Text inside Inner Card */
+    .inner-text {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .inner-text h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .inner-text p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .about-us-card {
+        padding: 0;
+        /* remove padding so inner card fills outer card */
+      }
+
+      .inner-card {
+        width: 100%;
+        /* now truly fills the outer box */
+        height: auto;
+        grid-template-columns: 40% 60%;
+        gap: 1rem;
+      }
+
+      .inner-image img {
+        width: 240px;
+        /* updated image width */
+        height: 245px;
+        /* updated image height */
+        object-fit: cover;
+      }
+
+      .inner-text {
+        padding: 1rem;
+      }
+
+      .inner-text h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .inner-text p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+    }
+
+    /* Why Choose Us Section */
+    .why-choose-us {
+      text-align: center;
+      padding: 4rem 2rem;
+      background-color: #f4f4f4;
+      margin-top: 5rem;
+      /* gap above */
+      margin-bottom: 5rem;
+      /* gap below */
+      padding-top: 5rem;
+      /* add breathing room inside */
+      padding-bottom: 5rem;
+
+    }
+
+    .why-choose-us h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .why-choose-us .section-desc {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 10rem;
+    }
+
+    /* Cards container */
+    .choose-cards {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      /* wrap on smaller screens */
+    }
+
+    /* Individual Card */
+    .choose-card {
+      width: 230px;
+      height: 230px;
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 1.5rem 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .choose-card .choose-icon img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 1rem;
+    }
+
+    .choose-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .choose-card p {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    .choose-card .choose-icon {
+      margin-bottom: 1rem;
+      /* same gap as before */
+    }
+
+    .choose-card .choose-icon i {
+      font-size: 60px;
+      /* same visual size as placeholder images */
+      color: #005a8c;
+      /* optional, match your theme */
+      display: block;
+      /* ensures margin-bottom works */
+      margin-bottom: 20px;
+    }
+
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .choose-cards {
+        gap: 1rem;
+        justify-content: center;
+      }
+
+      .choose-card {
+        width: 200px;
+        height: auto;
+        padding: 1rem;
+      }
+
+      .choose-card h3 {
+        font-size: 1.1rem;
+      }
+
+      .choose-card p {
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Reviews Section */
+    .reviews-section {
+      width: 100%;
+      min-height: 450px;
+      background-color: #f9f9f9;
+      padding: 3rem 0;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 5rem;
+    }
+
+    .reviews-header {
+      margin-left: 80px;
+      margin-bottom: 2rem;
+    }
+
+    .reviews-header h2 {
+      font-size: 2rem;
+      margin-bottom: 40px;
+      /* distance to description */
+    }
+
+    .reviews-header .reviews-desc {
+      font-size: 1rem;
+      color: #555;
+      max-width: 500px;
+      line-height: 1.5;
+    }
+
+    .reviews-cards {
+      display: flex;
+      gap: 1.5rem;
+      margin-left: 80px;
+      flex-wrap: wrap;
+    }
+
+    /* Individual review card */
+    .review-card {
+      width: 310px;
+      height: 180px;
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .review-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .review-title .stars i {
+      color: #f1c40f;
+      /* gold stars */
+      margin-left: 2px;
+      font-size: 14px;
+    }
+
+    .review-comment {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .reviews-header {
+        margin-left: 20px;
+        text-align: center;
+      }
+
+      .reviews-header h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+
+      .reviews-header .reviews-desc {
+        max-width: 90%;
+        margin: 0 auto 2rem auto;
+      }
+
+      .reviews-cards {
+        flex-direction: column;
+        align-items: center;
+        margin-left: 0;
+        gap: 1rem;
+      }
+
+      .review-card {
+        width: 90%;
+        height: auto;
+      }
+    }
+
+    /* Desktop adjustments for Reviews section */
+    @media (min-width: 769px) {
+
+      /* Remove left margin for cards and increase gap */
+      .reviews-cards {
+        margin-left: 0;
+        /* remove 80px left */
+        gap: 2rem;
+        /* increase space between cards */
+        justify-content: center;
+        /* center the row */
+      }
+
+      /* Increase space between name/stars and comment */
+      .review-comment {
+        margin-top: 40px;
+        /* adds 40px below name/stars */
+      }
+
+      .reviews-cards {
+        margin-top: 30px;
+        /* increase distance from description to cards */
+      }
+    }
+
+    /* Contact Section */
+    .contact-container {
+      display: flex;
+      justify-content: center;
+      /* center all items horizontally */
+      flex-wrap: wrap;
+      /* wrap to next line if screen too small */
+      gap: 3rem;
+      /* space between each contact item */
+      padding: 0 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.1rem;
+      /* gap above */
+      margin-bottom: 2rem;
+      /* gap below */
+      /* add breathing room inside */
+      padding-bottom: 2rem;
+    }
+
+    .contact-item i {
+      font-size: 1.5rem;
+      color: #FFC300;
+      min-width: 30px;
+      /* ensures icons are aligned */
+    }
+
+    .contact-item a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    .contact-item a:hover {
+      color: #005a8c;
+    }
+
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .contact-section {
+        padding: 2.5rem 1.5rem;
+        background-color: #f9f9f9;
+      }
+
+      .contact-section h2 {
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        color: black;
+      }
+
+      .contact-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        /* Reduced from 1.5rem */
+      }
+
+      .contact-item {
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        max-width: 320px;
+        padding: 1rem 1.2rem;
+        /* Reduced padding */
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .contact-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      }
+
+      .contact-item i {
+        font-size: 1.8rem;
+        color: #FFC300;
+      }
+    }
+
+    .menu-nav {
+      display: flex;
+      overflow-x: auto;
+      background-color: #0b1a4d;
+      /* dark blue */
+      padding: 10px 0;
+      gap: 25px;
+      white-space: nowrap;
+      justify-content: center;
+      scrollbar-width: none;
+      margin-bottom: 40px;
+      /* hide scrollbar on Firefox */
+    }
+
+    .menu-nav::-webkit-scrollbar {
+      display: none;
+      /* hide scrollbar on Chrome/Safari */
+    }
+
+    .menu-nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      padding: 8px 12px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-nav a:hover {
+      color: #f4d03f;
+      /* golden highlight */
+      text-decoration: underline;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /*.hero-section {
+      position: relative;
+      background: url('/pizza_elements.png') center/cover no-repeat;
+      /* replace with your image path 
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.45);
+      /* dark overlay for contrast 
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      padding: 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+      font-weight: 500;
+    }
+
+    .brand-name {
+      font-size: 3.7rem;
+      background-color: #FFC300;
+      display: inline-block;
+      padding: 0.3em 0.8em;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    .tagline {
+      margin-top: 0.6rem;
+      font-size: 1.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-buttons {
+      margin-top: 1.8rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.75em 1.6em;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .primary-btn {
+      background-color: #FFC300;
+      color: white;
+    }
+
+    .primary-btn:hover {
+      background-color: #FFE345;
+    }
+
+    .secondary-btn {
+      background-color: #ED0C1D;
+      color: white;
+    }
+
+    .secondary-btn:hover {
+      background-color: #b92b36;
+    } */
+
+    .hero-section {
+      position: relative;
+      background: url('/pizza_elements.png') center/cover no-repeat;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .welcome {
+      font-size: 3.5rem; 
+      color: #FFC300;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 900;
+      color: white;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-family: 'Arial Black', 'Arial Bold', sans-serif;
+    }
+
+
+    .brand-name {
+      font-size: 5rem;
+      background-color: #FFC300;
+      color: white;
+      display: inline-block;
+      padding: 0.3em 0.8em;
+      border-radius: 6px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      margin-bottom: 1rem;
+      font-family: 'Arial Black', 'Arial Bold', sans-serif;
+      white-space: nowrap;
+      /* Keeps text on one line */
+    }
+
+    .tagline {
+      font-size: 2rem;
+      color: white;
+      font-weight: 700;
+      letter-spacing: 2px;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 0.5rem;
+      font-family: 'Arial Black', 'Arial Bold', sans-serif;
+    }
+
+    .tagline::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background-color: white;
+    }
+
+    .hero-buttons {
+      margin-top: 2.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.75em 1.6em;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .primary-btn {
+      background-color: #FFC300;
+      color: white;
+    }
+
+    .primary-btn:hover {
+      background-color: #FFE345;
+      transform: translateY(-2px);
+    }
+
+    .secondary-btn {
+      background-color: #ED0C1D;
+      color: white;
+    }
+
+    .secondary-btn:hover {
+      background-color: #b92b36;
+      transform: translateY(-2px);
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 40px 0 30px;
+    }
+
+    .section-title h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .section-title .highlight {
+      background-color: #0a1b55;
+      /* your dark blue */
+      color: white;
+      padding: 4px 12px;
+      border-radius: 6px;
+    }
+
+    #starters h2 {
+      color: #0a1b55;
+      /* deep blue */
+    }
+
+    #location {
+      padding: 60px 20px;
+      max-width: 1300px;
+      margin: 0 auto;
+      font-family: "Helvetica", sans-serif;
+    }
+
+    #location h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #0b1f54;
+      border-bottom: 3px solid #f5b700;
+      /* highlight line like on Menu */
+      display: inline-block;
+      padding-bottom: 5px;
+      margin-bottom: 40px;
+    }
+
+
+    /* --- Contact Cards --- */
+    .contact-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 60px;
+    }
+
+    .contact-card {
+      flex: 1 1 280px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 25px 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .contact-card i {
+      font-size: 2rem;
+      color: #005a8c;
+      margin-bottom: 15px;
+    }
+
+    .contact-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #0b1f54;
+    }
+
+    .contact-card a {
+      color: #005a8c;
+      text-decoration: none;
+    }
+
+    .career-btn {
+      background-color: #0b1f54;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .career-btn:hover {
+      background-color: #132e7a;
+    }
+
+    /* --- Map Section --- */
+    .map-section {
+      margin-top: 20px;
+    }
+
+    .visit-title {
+      text-align: left;
+      font-size: 1.8rem;
+      color: #0b1f54;
+      margin-bottom: 20px;
+    }
+
+    .map-container {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 500px;
+      border: 0;
+    }
+
+    .map-details {
+      position: absolute;
+      bottom: 15px;
+      left: 20px;
+      background: rgba(11, 31, 84, 0.85);
+      color: #fff;
+      padding: 15px 20px;
+      border-radius: 10px;
+    }
+
+    .map-details h3 {
+      margin: 0 0 5px;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      .contact-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .map-details {
+        position: static;
+        background: #0b1f54;
+        border-radius: 0 0 16px 16px;
+        margin-top: -4px;
+        text-align: center;
+      }
+
+      .map-container iframe {
+        height: 350px;
+      }
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background-color: #0a1b55;
+      color: #fff;
+      padding: 60px 50px 20px;
+      font-family: "Helvetica", sans-serif;
+    }
+
+    /* Top Layout */
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 40px;
+    }
+
+    /* Columns */
+    .footer-col {
+      flex: 1 1 220px;
+      min-width: 200px;
+    }
+
+    .footer-col h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .footer-col h3 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #FFC300;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 8px;
+      color: #ddd;
+    }
+
+    .footer-col ul li a {
+      text-decoration: none;
+      color: #ddd;
+      transition: color 0.3s;
+    }
+
+    .footer-col ul li a:hover {
+      color: #FFC300;
+    }
+
+    /* About Column */
+    .footer-col.about p.slogan {
+      color: #FFC300;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .footer-col.about p {
+      color: #ccc;
+      line-height: 1.5;
+      max-width: 280px;
+    }
+
+    /* Contact Column */
+    .footer-col.contact p {
+      margin-bottom: 10px;
+    }
+
+    .footer-col.contact a {
+      color: #FFC300;
+      text-decoration: none;
+    }
+
+    .footer-col.contact a:hover {
+      text-decoration: underline;
+    }
+
+    /* Subscribe Box */
+    .subscribe-box {
+      display: flex;
+      margin-top: 15px;
+    }
+
+    .subscribe-box input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .subscribe-box button {
+      background-color: #FFC300;
+      color: #0b1f54;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .subscribe-box button:hover {
+      background-color: #FFD84C;
+    }
+
+    /* Social Icons */
+    .social-icons {
+      margin-top: 15px;
+    }
+
+    .social-icons a {
+      color: #fff;
+      font-size: 1.2rem;
+      margin-right: 15px;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #FFC300;
+    }
+
+    /* Bottom Bar */
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      text-align: center;
+      padding-top: 15px;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom .bottom-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .footer-bottom .bottom-links a {
+      color: #aaa;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-bottom .bottom-links a:hover {
+      color: #FFC300;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .footer {
+        padding: 40px 20px 20px;
+      }
+
+      .footer-top {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-col h2,
+      .footer-col h3 {
+        margin-bottom: 10px;
+      }
+
+      .footer-col.about p {
+        max-width: 100%;
+        margin: 0 auto 15px;
+      }
+
+      .subscribe-box {
+        flex-direction: column;
+      }
+
+      .subscribe-box input {
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+
+      .subscribe-box button {
+        border-radius: 4px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer {
+        display: none !important;
+      }
+
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+
+      .brand-name {
+        font-size: 2.5rem;
+        white-space: nowrap;
+        padding: 0.2em 0.5em;
+        /* Reduced padding for smaller border */
+      }
+
+      .tagline {
+        font-size: 1.2rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 250px;
+      }
+    }
+
+    /* Hide footer on small screens (≤640px) */
+    @media (max-width: 640px) {
+      .footer {
+        display: none !important;
+      }
+    }
+
+    /* --- Contact Cards --- */
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(240px, 1fr));
+      gap: 25px;
+      margin-bottom: 60px;
+      align-items: stretch;
+      /* equal heights */
+    }
+
+    @media (max-width: 1024px) {
+      .contact-cards {
+        grid-template-columns: repeat(2, minmax(240px, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .contact-cards {
+        grid-template-columns: 1fr;
+        /* full width on phones */
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+
+      .brand-name {
+        font-size: 3rem;
+      }
+    }
+
+    .contact-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      /* center content vertically */
+      align-items: center;
+      min-height: 170px;
+      /* equal visual height */
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .contact-card i {
+      font-size: 2rem;
+      color: #FFC300;
+      margin-bottom: 10px;
+      line-height: 1;
+    }
+
+    .contact-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+      color: #0b1f54;
+    }
+
+    .contact-card p {
+      margin: 0;
+      word-break: break-word;
+      /* no overflow on long handles/emails */
+    }
+
+    .contact-card a {
+      color: #005a8c;
+      text-decoration: none;
+    }
+
+    .contact-card a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <!-- <header>
+    <a href="#" class="logo" onclick="showPage('home')">Dalina Pizzeria</a>
+    <nav>
+      <a class="active" data-page="home">Home</a>
+      <a data-page="menu">Menu</a>
+      <a data-page="location">Location</a>
+
+    </nav>
+  </header>. -->
+
+  <header class="navbar">
+    <div href="#" class="logo" onclick="showPage('home')">Dalina Pizzeria</div>
+    <nav class="nav-links">
+      <a class="active" data-page="home">HOME</a>
+      <a data-page="menu">MENU</a>
+      <a data-page="location">LOCATION</a>
+    </nav>
+  </header>
+
+
+  <!-- Sections -->
+  <section id="home" class="active">
+    <!-- Intro section inside home -->
+
+
+    <section id="home" class="hero-section">
+      <div class="hero-overlay">
+        <div class="hero-content">
+          <h1 class="welcome">Welcome to</h1>
+          <h2 class="brand-name">Dalina Pizzeria</h2>
+          <p class="tagline">Restaurant – Pizzeria - Coffee Bar</p>
+          <div class="hero-buttons">
+            <a href="#menu" class="btn primary-btn" onclick="showPage('menu')">See Our Menu</a>
+            <a href="https://web.dojo.app/create_booking/vendor/FuXCiwh2FrCuDOZMWtGTIITBL1u0Zq5pxx97XghpVZM_restaurant"
+              class="btn primary-btn">Book a Table</a>
+            <a href="tel:+441234567890" class="btn secondary-btn">Call Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- Outer Card / Box -->
+    <div id="about_us" class="about-us-card">
+      <!-- Inner Card -->
+      <div class="inner-card">
+        <div class="inner-image">
+          <img src="/images/Pizzeria_look.png" alt="About Us Image">
+        </div>
+        <div class="inner-text">
+          <h3 style="margin-bottom: 30px; margin-left: 30px;">About Us</h3>
+          <p class="par1" style="margin-bottom: 20px; margin-left: 30px;">We are passionate about making the best pizza
+            in town. Our recipes are crafted with care and
+            our
+            ingredients are always fresh. Come taste the difference!</p>
+          <p class="par2" style="margin-top: 10px; margin-left: 30px;">Open from 11am to 10:30pm</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why Choose Us Section -->
+    <div id="why-choose-us" class="why-choose-us">
+      <h2>Why Choose Us</h2>
+      <p class="section-desc">We are committed to providing the best experience and quality for our customers.</p>
+
+      <div class="choose-cards">
+        <!-- Card 1 -->
+        <div class="choose-card">
+          <div class="choose-icon">
+            <i class="fas fa-utensils fa-3x" style="color: #FFC300;"></i> <!-- Food icon -->
+          </div>
+          <h3>Fresh Food</h3>
+          <p>We serve the best and fresh quality food prepared daily.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="choose-card">
+          <div class="choose-icon">
+            <i class="fas fa-hands-helping fa-3x" style="color: #FFC300;"></i> <!-- Service icon -->
+          </div>
+          <h3>Excellent Service</h3>
+          <p>Our friendly staff ensures a pleasant dining experience for everyone.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="choose-card">
+          <div class="choose-icon">
+            <i class="fas fa-coffee fa-3x" style="color: #FFC300;"></i> <!-- Cozy atmosphere icon -->
+          </div>
+          <h3>Cozy Atmosphere</h3>
+          <p>Enjoy your meal in a warm and welcoming environment.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div id="what_people" class="reviews-section">
+      <div class="reviews-header">
+        <h2>What people say about us?</h2>
+        <p class="reviews-desc">Our customers love our food and service. Here’s what they have to say about their
+          experience at our pizzeria.</p>
+      </div>
+
+      <div class="reviews-cards">
+        <!-- Review Card 1 -->
+        <div class="review-card">
+          <div class="review-title">
+            <span>John Doe</span>
+            <span class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </span>
+          </div>
+          <p class="review-comment">Amazing pizza! The dough is fresh and the toppings are perfect. Highly recommend.
+          </p>
+        </div>
+
+        <!-- Review Card 2 -->
+        <div class="review-card">
+          <div class="review-title">
+            <span>Jane Smith</span>
+            <span class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </span>
+          </div>
+          <p class="review-comment">Great atmosphere and friendly staff. Best pizza in town!</p>
+        </div>
+
+        <!-- Review Card 3 -->
+        <div class="review-card">
+          <div class="review-title">
+            <span>Michael Lee</span>
+            <span class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </span>
+          </div>
+          <p class="review-comment">Loved it! The Margherita is my favorite. Fresh ingredients and tasty pizza.</p>
+        </div>
+
+        <!-- Review Card 4 -->
+        <div class="review-card">
+          <div class="review-title">
+            <span>Emily Johnson</span>
+            <span class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </span>
+          </div>
+          <p class="review-comment">Exceptional service and cozy environment. The best place to enjoy pizza with family!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Section (under Reviews) -->
+    <div class="contact-section">
+      <h2 style="text-align:center; margin-bottom:2rem;">Contact Us</h2>
+
+      <div class="contact-container">
+        <div class="contact-item">
+          <i class="fab fa-instagram"></i>
+          <a href="https://www.instagram.com/dalinapizzeria1/" target="_blank">@dalinapizzeria1</a>
+        </div>
+
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <a href="tel:+447359179795">+44 7359179795</a>
+        </div>
+
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <a href="mailto:dalinapizzeria6@gmail.com">Email us</a>
+        </div>
+
+        <div class="contact-item">
+          <i class="fas fa-clock"></i>
+          <span>Mon-Sun: 11am - 10:30pm</span>
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+
+  <section id="menu">
+    <div>
+      <div class="section-title">
+        <h2>
+          Explore <span class="highlight">Dalina Pizzeria's</span> menu – where flavour meets tradition
+        </h2>
+      </div>
+
+
+      <nav class="menu-nav">
+        <a href="#starters">Starters</a>
+        <a href="#pizzas">Pizzas</a>
+        <a href="#pastas">Pastas</a>
+        <a href="#special-dishes">Special Dishes</a>
+        <a href="#desserts">Desserts</a>
+        <a href="#hot_drinks">Hot Drinks</a>
+        <a href="#iced_coffees">Iced Coffees</a>
+        <a href="#soft_drinks">Soft Drinks</a>
+        <a href="#water">Water</a>
+        <a href="#nonalcoholic">Non-Alcoholic Beers & Wines</a>
+        <a href="#mocktails">Mocktails</a>
+
+
+
+      </nav>
+    </div>
+
+
+    <!-- starters section -->
+    <div id="starters" class="menu-category">
+      <h2>Starters</h2>
+      <p class="menu-description">Perfect bites to begin your meal, made fresh in-house.</p>
+      <div class="cards">
+        <div class="card">
+          <img src="/images/garlic bread.png">
+          <h3>Garlic Bread</h3>
+          <p>Warm, crispy bread brushed with garlic butter.</p>
+          <span class="price">Only £6.00</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/garlic_tomato.png">
+          <h3>Garlic Bread with Tomato</h3>
+          <p>Classic garlic bread topped with fresh tomato.</p>
+          <span class="price">Only £6.50</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/garlic_cheese.png">
+          <h3>Garlic Bread with Cheese</h3>
+          <p>Gooey melted cheese over golden garlic bread.</p>
+          <span class="price">Only £6.80</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/brusketa.png">
+          <h3>Bruschetta Napoli</h3>
+          <p>Toasted bread with fresh tomato, basil & olive oil.</p>
+          <span class="price">Only £6.80</span>
+        </div>
+
+
+        <div class="card">
+          <img src="/images/garlic_tomato.png">
+          <h3>Garlic Bread with Tomato</h3>
+          <p>Classic garlic bread topped with fresh tomato.</p>
+          <span class="price">Only £6.50</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/green padron.png">
+          <h3>Green Padron Peppers</h3>
+          <p>Lightly fried Green Padron peppers with a touch of sea salt.</p>
+          <span class="price">Only £7.95</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/rocket salad.png">
+          <h3>Rocket Salad Salad</h3>
+          <p>Fresh rocket leaves with shaved Parmesan, cherry tomatoes, and olive oil.</p>
+          <span class="price">Only £7.50</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/greek salad.png">
+          <h3>Greek Salad</h3>
+          <p>Crisp cucumber, tomato, red onion, feta cheese, and Kalamata olives</p>
+          <span class="price">Only £8.50</span>
+        </div>
+        <div class="card">
+          <img src="/images/tiger prawns.png">
+          <h3>Tiger Prawns</h3>
+          <p>Premium tiger prawns bringing a taste of the sea to your table.</p>
+          <span class="price">Only £9.95</span>
+        </div>
+        <!-- add more starter cards here -->
+      </div>
+    </div>
+
+    <!-- pizzas section -->
+    <div id="pizzas" class="menu-category">
+      <h2>Pizzas</h2>
+      <p class="menu-description">Hand-tossed dough, fresh ingredients and our signature tomato sauce.</p>
+      <div class="cards">
+
+        <div class="card">
+          <img src="images/margerita.png">
+          <h3>Margherita Pizza</h3>
+          <p>Classic tomato sauce & mozzarella.</p>
+          <span class="price">Only £9.95</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/proshute.png">
+          <h3>Prosciutto Pizza</h3>
+          <p>Prosciutto, cherry tomatos, tomato sauce, mozzarella, rocket</p>
+          <span class="price">Only £12.95</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/salami.png">
+          <h3>Salami Pizza</h3>
+          <p>Milano salami, tomato sauce, mozzarella</p>
+          <span class="price">Only £12.95</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/ham_mushroom.png">
+          <h3>Ham & Mushroom Pizza</h3>
+          <p>Ham, Mushrooms, mozzarella & tomato sauce</p>
+          <span class="price">Only £12.95</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/tuna.png">
+          <h3>Tuna Pizza</h3>
+          <p>Tuna, mushrooms, onions, tomato sauce</p>
+          <span class="price">Only £12.95</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/vegetarian.png">
+          <h3>Vegetariana Pizza</h3>
+          <p>Mozzarella, mushrooms, tomato sauce, onions & peppers</p>
+          <span class="price">Only £12.95</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/napoli.png">
+          <h3>Pizza Napoli</h3>
+          <p>Anchovies, cappers, mozzarella & tomato sauce</p>
+          <span class="price">Only £12.95</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="pastas" class="menu-category">
+      <h2>Pastas</h2>
+      <p class="menu-description">Our homemade pasta dishes are prepared with authentic Italian recipes, combining fresh
+        ingredients and traditional flavours for a true taste of Italy</p>
+      <div class="cards">
+
+        <div class="card">
+          <img src="/images/lasagna.png">
+          <h3>Lasagna</h3>
+          <p>Traditional baked pasta with layers of meat & bechamel</p>
+          <span class="price">Only £13.95</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/al_forno.png">
+          <h3>Pasta al Forno</h3>
+          <p>Oven-baked pasta with rich tomato sauce, mozzarella & minced beef</p>
+          <span class="price">Only £12.95</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/bolognese.png">
+          <h3>Penne Bolognese</h3>
+          <p>Classic Italian pasta served with slow-cooked beef & tomato sauce</p>
+          <span class="price">Only £12.50</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/carbonara.png">
+          <h3>Carbonara with Hot Pasta Sauce</h3>
+          <p>Creamy pasta with pancetta, egg & Parmesan, finished with a spicy touch</p>
+          <span class="price">Only £12.95</span>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- drinks section -->
+    <div id="special-dishes" class="menu-category">
+      <h2>Special Dishes</h2>
+      <p class="menu-description">Unique plates inspired by traditional recipes and modern tastes</p>
+      <div class="cards">
+        <div class="card">
+          <img src="/images/salmon_salad.png">
+          <h3>Salmon & Mixed Salad</h3>
+          <p>Grilled salmon fillet served with fresh greens, feta cheese, and a light dressing</p>
+          <span class="price">Only £15.99</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/salmon_mash.png">
+          <h3>Salmon & Mash Potato</h3>
+          <p>Tender salmon paired with creamy mashed potatoes and seasonal vegetables</p>
+          <span class="price">Only £16.50</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/tiger_prawns.png">
+          <h3>Tiger Prawns with White Wine & Sweet Fruit Salad</h3>
+          <p>Delicate tiger prawns complemented by a fresh fruit salad and white wine notes</p>
+          <span class="price">Only £17.50</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- desserts section -->
+    <div id="desserts" class="menu-category">
+      <h2>Desserts</h2>
+      <p class="menu-description">Perfect bites to begin your meal, made fresh in-house.</p>
+      <div class="cards">
+        <div class="card">
+          <img src="/images/trilece.png">
+          <h3>Trilece</h3>
+          <p>Soft sponge cake soaked in three kinds of milk and charamel cream on top</p>
+          <span class="price">Only £6.70</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/milkchoc.png">
+          <h3>Milk Chocolate Ice cream</h3>
+          <p>Silky milk chocolate gelato with a velvety finish, made with fresh milk from Dorset</p>
+          <span class="price">Only £4.50(per scoop)</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/vanilla.png">
+          <h3>Vanilla Ice Cream</h3>
+          <p>Classic Madagascar vanilla ice cream, smooth and creamy, made with fresh milk from Dorset</p>
+          <span class="price">Only £4.50(per scoop)</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/pistachio.png">
+          <h3>Pistachio Ice cream</h3>
+          <p>Artisan pistachio gelato with a delicate aroma, made with fresh milk from Dorset</p>
+          <span class="price">Only £4.50(per scoop)</span>
+        </div>
+        <!-- add more starter cards here -->
+      </div>
+    </div>
+
+
+    <!-- desserts section -->
+    <div id="hot_drinks" class="menu-category">
+      <h2>Hot Drinks</h2>
+      <p class="menu-description">Perfect bites to begin your meal, made fresh in-house.</p>
+      <div class="cards">
+        <div class="card">
+          <img src="/images/esspresso.png">
+          <h3>Espresso</h3>
+          <p></p>
+          <span class="price">Only £6.70</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/do_esspress.png">
+          <h3>Double Espresso</h3>
+          <p></p>
+          <span class="price">Only £6.70</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/mach.png">
+          <h3>Macchiato</h3>
+          <p></p>
+          <span class="price">Only £6.70</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/double_mach.png">
+          <h3>Double Macchiato</h3>
+          <p></p>
+          <span class="price">Only £6.70</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/americano.png">
+          <h3>Americano</h3>
+          <p></p>
+          <span class="price">Only £6.70</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/double_americano.png">
+          <h3>Double Americano</h3>
+          <p></p>
+          <span class="price">Only £6.70</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/latte.png">
+          <h3>Latte</h3>
+          <p></p>
+          <span class="price">Only £6.70</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/cappucino.png">
+          <h3>Cappuccino</h3>
+          <p></p>
+          <span class="price">Only £6.70</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/flat white.png">
+          <h3>Flat White</h3>
+          <p></p>
+          <span class="price">Only £6.70</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/mocha.png">
+          <h3>Mocha</h3>
+          <p></p>
+          <span class="price">Only £6.70</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/hot_choch.png">
+          <h3>Hot Chocolate</h3>
+          <p></p>
+          <span class="price">Only £6.70</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/tea.png">
+          <h3>Tea (English, Lemon, Ginger, Green)</h3>
+          <p></p>
+          <span class="price">Only £6.70</span>
+        </div>
+
+        <!-- add more starter cards here -->
+      </div>
+    </div>
+
+    <!-- iced coffees section -->
+    <div id="iced_coffees" class="menu-category">
+      <h2>Iced Coffees</h2>
+      <p class="menu-description">Cool and refreshing coffee favourites, perfect for any time of day.</p>
+      <div class="cards">
+        <div class="card">
+          <img src="/images/iced_esspresso.png">
+          <h3>Iced Espresso</h3>
+          <p></p>
+          <span class="price">Only £3.80</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/iced_latte.png">
+          <h3>Iced Latte</h3>
+          <p></p>
+          <span class="price">Only £4.50</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/iced_cap.png">
+          <h3>Iced Cappuccino</h3>
+          <p></p>
+          <span class="price">Only £4.50</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/iced_choc.png">
+          <h3>Iced Chocolate</h3>
+          <p></p>
+          <span class="price">Only £4.80</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- soft drinks section -->
+    <div id="soft_drinks" class="menu-category">
+      <h2>Soft Drinks</h2>
+      <p class="menu-description">A refreshing variety of classic soft drinks to complement your meal.</p>
+      <div class="cards">
+        <div class="card">
+          <img src="/images/coke.png">
+          <h3>Coca-Cola (Classic / Diet)</h3>
+          <p></p>
+          <span class="price">Only £3.30</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/fanta.png">
+          <h3>Fanta Orange</h3>
+          <p></p>
+          <span class="price">Only £3.30</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/sprite.png">
+          <h3>Sprite</h3>
+          <p></p>
+          <span class="price">Only £3.30</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/pepsi.png">
+          <h3>Pepsi</h3>
+          <p></p>
+          <span class="price">Only £3.30</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/sanpelle.png">
+          <h3>San Pellegrino (Aranciata, Limonata, Aranciata Rossa)</h3>
+          <p></p>
+          <span class="price">Only £3.60</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/icedtea.png">
+          <h3>Ice Tea (Peach / Lemon)</h3>
+          <p></p>
+          <span class="price">Only £3.60</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/capri_sun.png">
+          <h3>Capri-Sun</h3>
+          <p></p>
+          <span class="price">Only £2.80</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/red bull.png">
+          <h3>Red Bull</h3>
+          <p></p>
+          <span class="price">Only £4.50</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- water section -->
+    <div id="water" class="menu-category">
+      <h2>Water</h2>
+      <p class="menu-description">Stay hydrated with still or sparkling premium bottled water.</p>
+      <div class="cards">
+        <div class="card">
+          <img src="/images/still.png">
+          <h3>Still Water (Aqua Carpatica / Fiji / Highland Spring)</h3>
+          <p></p>
+          <span class="price">Only £2.50</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/sparkling.png">
+          <h3>Sparkling Water (San Pellegrino / Schweppes)</h3>
+          <p></p>
+          <span class="price">Only £2.80</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- non-alcoholic beers and wines section -->
+    <div id="nonalcoholic" class="menu-category">
+      <h2>Non-Alcoholic Beers & Wines</h2>
+      <p class="menu-description">Enjoy the taste without the alcohol — perfect for any occasion.</p>
+      <div class="cards">
+        <div class="card">
+          <img src="/images/heineken.png">
+          <h3>Heineken 0.0</h3>
+          <p></p>
+          <span class="price">Only £4.50</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/peroni.png">
+          <h3>Peroni 0.0</h3>
+          <p></p>
+          <span class="price">Only £4.50</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/eisberg.png">
+          <h3>Eisberg White (Non-Alcoholic Wine)</h3>
+          <p></p>
+          <span class="price">Only £5.50 / glass</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/rose.png">
+          <h3>Eisberg Rosé (Non-Alcoholic Wine)</h3>
+          <p></p>
+          <span class="price">Only £5.50 / glass</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- mocktails section -->
+    <div id="mocktails" class="menu-category">
+      <h2>Mocktails</h2>
+      <p class="menu-description">Delicious and creative alcohol-free cocktails bursting with flavour.</p>
+      <div class="cards">
+        <div class="card">
+          <img src="/images/forest_collins.png">
+          <h3>Forest Collins</h3>
+          <p></p>
+          <span class="price">Only £6.50</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/garden nargarita.png">
+          <h3>Garden Margarita</h3>
+          <p></p>
+          <span class="price">Only £6.50</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/forest_mojito.png">
+          <h3>Forest Mojito</h3>
+          <p></p>
+          <span class="price">Only £6.90</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/clover_leaf.png">
+          <h3>Clover Leaf</h3>
+          <p></p>
+          <span class="price">Only £6.90</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/daiquiri_delight.png">
+          <h3>Daiquiri Delight</h3>
+          <p></p>
+          <span class="price">Only £7.20</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/sakura_paloma.png">
+          <h3>Sakura Paloma</h3>
+          <p></p>
+          <span class="price">Only £7.20</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/amalfi_spritz.png">
+          <h3>Amalfi Spritz</h3>
+          <p></p>
+          <span class="price">Only £7.50</span>
+        </div>
+
+        <div class="card">
+          <img src="/images/mountain_pornstar.png">
+          <h3>Mountain Pornstar</h3>
+          <p></p>
+          <span class="price">Only £7.90</span>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </section>
+
+
+  <section id="location">
+    <h1 class="section-title" style="color:#000">Contact Us</h1>
+
+    <div class="contact-map-wrapper">
+      <!-- Contact Cards -->
+      <div class="contact-cards">
+        <div class="contact-card">
+          <i class="fas fa-envelope" style="color: #FFC300;"></i>
+          <h3>General Inquiries</h3>
+          <p><a href="mailto:dalinapizzeria6@gmail.com" style="color: #FFC300;">dalinapizzeria6@gmail.com</a></p>
+        </div>
+
+        <div class="contact-card">
+          <i class="fas fa-phone" style="color: #FFC300;"></i>
+          <h3 style="color: #0a1b55;">Contact to Order</h3>
+          <p><a href="tel:+44 7359179795" style="color: #FFC300;">+44 7359179795</a></p>
+        </div>
+
+        <div class="contact-card">
+          <i class="fa-solid fa-calendar-check" style="color: #FFC300;"></i>
+          <h3>Book a Table</h3>
+          <p><a href="https://web.dojo.app/create_booking/vendor/FuXCiwh2FrCuDOZMWtGTIITBL1u0Zq5pxx97XghpVZM_restaurant"
+              target="_blank" style="color: #FFC300;">Via Our Booking App</a></p>
+        </div>
+      </div>
+
+
+      <!-- Map Section -->
+      <div class="map-section">
+        <h1 class="visit-title" style="color:#000">Visit Us</h1>
+        <div class="map-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d994.3857287256075!2d-0.056935211105156384!3d51.42641457920626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487601294e1adeb5%3A0xc6371df8baab768e!2sDalina%20Pizzeria!5e0!3m2!1sen!2suk!4v1731019359136!5m2!1sen!2suk"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+
+          <div class="map-details">
+            <h3>Dalina Pizzeria</h3>
+            <p>8 Sydenham RD, London SE26 5QW</p>
+            <p>Tel: +44 7359179795</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-top">
+      <!-- About Column -->
+      <div class="footer-col about">
+        <h2>DALINA PIZZERIA</h2>
+        <p class="slogan">Authentic Italian Flavours</p>
+        <p>We’re proud to serve handmade pizzas, fresh ingredients, and a warm atmosphere that makes every meal special.
+        </p>
+      </div>
+
+      <!-- Services Column -->
+      <div class="footer-col">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="#" onclick="showPage('menu')">Food Menu</a></li>
+          <li><a href="#hot_drinks" onclick="showPage('menu')">Drinks Menu</a></li>
+        </ul>
+      </div>
+
+      <!-- Company Column -->
+      <div class="footer-col">
+        <h3>More on Us</h3>
+        <ul>
+          <li><a href="#about_us">About Us</a></li>
+          <li><a href="#why-choose-us">Why Choose Us</a></li>
+          <li><a href="#what_people">Reviews</a></li>
+          <li><a href="#" onclick="showPage('menu')">Our Menu</a></li>
+          <li><a href="#" onclick="showPage('location')">Contact Us</a></li>
+          <li><a href="#" onclick="showPage('location')">Find Us</a></li>
+        </ul>
+      </div>
+
+
+      <!-- Contact Column -->
+      <div class="footer-col contact">
+        <h3>Contact Us</h3>
+        <p><strong>Call:</strong> <a href="tel:+447359179795">+44 7359 179795</a></p>
+        <p><strong>Email:</strong> <a href="mailto:dalinapizzeria6@gmail.com">dalinapizzeria6@gmail.com</a></p>
+
+        <div class="subscribe-box">
+          <input type="email" placeholder="Write Email" />
+          <button><i class="fas fa-paper-plane"></i></button>
+        </div>
+
+        <div class="social-icons">
+          <a href="https://www.instagram.com/dalinapizzeria1/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61580232167507" target="_blank"><i
+              class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://www.tiktok.com/@dalina.pizzeria" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Dalina Pizzeria. All rights reserved.</p>
+      <div class="bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Our History</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    // Switch pages
+    const navLinks = document.querySelectorAll('header nav a');
+    const sections = document.querySelectorAll('section');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        // remove active from all links
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+
+        // hide all sections
+        sections.forEach(sec => sec.classList.remove('active'));
+        // show selected section
+        document.getElementById(link.dataset.page).classList.add('active');
+      });
+    });
+
+    function showPage(pageId) {
+      navLinks.forEach(l => {
+        l.classList.remove('active');
+        if (l.dataset.page === pageId) {
+          l.classList.add('active');
+        }
+      });
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+    }
+  </script>
+</body>
+
+</html>
